@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "409397589368",
+    "project_id": "orwmaproject",
+    "storage_bucket": "orwmaproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:409397589368:android:75495d8e18c98c84d6048d",
+        "android_client_info": {
+          "package_name": "agency.five.codebase.android.orwim"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "409397589368-0fg9u7jnn7gegk8km0ermb3rrpvg5n8v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrmehwmdCbk46_tAt4p7OC7EpMhcyAplQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "409397589368-0fg9u7jnn7gegk8km0ermb3rrpvg5n8v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
