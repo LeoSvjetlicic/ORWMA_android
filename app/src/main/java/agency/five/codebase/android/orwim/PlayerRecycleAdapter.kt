@@ -42,6 +42,7 @@ class PlayerRecycleAdapter(
 
     class PlayerViewHolder(val view: View, clickListener: ItemListener) :
         RecyclerView.ViewHolder(view) {
+
         init {
             itemView.setOnClickListener {
                 clickListener.onItemClick(adapterPosition)

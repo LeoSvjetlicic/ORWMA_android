@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,12 +18,12 @@ class MainFragment : Fragment(), PlayerRecycleAdapter.ContentListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val items: ArrayList<Player> = ArrayList()
         val view = inflater.inflate(R.layout.fragment_main, container, false)
         val recyclerView = view?.findViewById<RecyclerView>(R.id.main_fragment_recycler)
         db.collection("players")
             .get()
             .addOnSuccessListener {
-                val items: ArrayList<Player> = ArrayList()
                 for (data in it.documents) {
                     val player = Player(
                         id = data.id,
@@ -43,14 +43,14 @@ class MainFragment : Fragment(), PlayerRecycleAdapter.ContentListener {
                     override fun onItemClick(index: Int) {
                         val detailsFragment = DetailsFragment()
                         val bundle = Bundle()
-                        bundle.putString("IMAGE",items[index].imageUrl)
-                        bundle.putString("NAME",items[index].name)
-                        bundle.putString("DESCRIPTION",items[index].description)
-                        detailsFragment.arguments=bundle
+                        bundle.putString("IMAGE", items[index].imageUrl)
+                        bundle.putString("NAME", items[index].name)
+                        bundle.putString("DESCRIPTION", items[index].description)
+                        detailsFragment.arguments = bundle
 
                         val fragmentTransaction: FragmentTransaction? =
                             requireActivity().supportFragmentManager.beginTransaction()
-                        fragmentTransaction!!.replace(R.id.mainFragment,detailsFragment)
+                        fragmentTransaction!!.replace(R.id.mainFragment, detailsFragment)
                         fragmentTransaction.addToBackStack(null)
                         fragmentTransaction.commit()
                     }
@@ -64,6 +64,42 @@ class MainFragment : Fragment(), PlayerRecycleAdapter.ContentListener {
             fragmentTransaction!!.replace(R.id.mainFragment, AddFragment())
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
+        }
+
+        val searchText = view.findViewById<EditText>(R.id.search_input)
+        val searchBtn = view.findViewById<ImageButton>(R.id.search_button)
+        searchBtn.setOnClickListener {
+            var index = 0
+            for (i in -1 until recyclerView!!.adapter!!.itemCount) {
+                val holder = recyclerView.findViewHolderForAdapterPosition(i)
+                if (holder != null) {
+                    val accountNameView =
+                        holder.itemView.findViewById<View>(R.id.personName) as TextView
+                    if (accountNameView.text.toString()
+                            .equals(searchText.text.toString(), ignoreCase = true)
+                    ) {
+                        index = i
+                        break
+                    }
+                    index = -1
+                }
+            }
+            if (index != -1) {
+                val detailsFragment = DetailsFragment()
+                val bundle = Bundle()
+                bundle.putString("IMAGE", items[index].imageUrl)
+                bundle.putString("NAME", items[index].name)
+                bundle.putString("DESCRIPTION", items[index].description)
+                detailsFragment.arguments = bundle
+
+                val fragmentTransaction: FragmentTransaction? =
+                    requireActivity().supportFragmentManager.beginTransaction()
+                fragmentTransaction!!.replace(R.id.mainFragment, detailsFragment)
+                fragmentTransaction.addToBackStack(null)
+                fragmentTransaction.commit()
+            } else {
+                Toast.makeText(context, "This player doesn't exist.", Toast.LENGTH_SHORT).show()
+            }
         }
         return view
     }
