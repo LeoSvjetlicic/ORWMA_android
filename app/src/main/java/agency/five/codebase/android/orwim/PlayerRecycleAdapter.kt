@@ -12,7 +12,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 
 class PlayerRecycleAdapter(
-    private val items: ArrayList<Player>,
+    private var items: ArrayList<Player>,
     private var listener: ContentListener,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var mListener: ItemListener
@@ -68,6 +68,10 @@ class PlayerRecycleAdapter(
         mListener = listener
     }
 
+    fun updateItems(newItems:ArrayList<Player>){
+        items=newItems
+        notifyDataSetChanged()
+    }
     interface ItemListener {
         fun onItemClick(index: Int)
     }
