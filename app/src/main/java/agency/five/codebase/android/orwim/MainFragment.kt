@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
@@ -19,7 +18,8 @@ class MainFragment : Fragment(), PlayerRecycleAdapter.ContentListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val items = ArrayList<Player>()
+        var items = ArrayList<Player>()
+        var cachedItems = items
         val view = inflater.inflate(R.layout.fragment_main, container, false)
         val recyclerView = view?.findViewById<RecyclerView>(R.id.main_fragment_recycler)
         db.collection("players")
@@ -70,12 +70,17 @@ class MainFragment : Fragment(), PlayerRecycleAdapter.ContentListener {
         val searchText = view.findViewById<EditText>(R.id.search_input)
         val searchBtn = view.findViewById<ImageButton>(R.id.search_button)
         searchBtn.setOnClickListener {
-            recyclerAdapter.updateItems(items.filter {
-                it.name.contains(
-                    searchText.text,
-                    true
-                )
-            } as ArrayList<Player>)
+            if (searchText.text.isEmpty()) {
+                items = cachedItems
+            } else {
+                items = items.filter {
+                    it.name.contains(
+                        searchText.text,
+                        true
+                    )
+                } as ArrayList<Player>
+            }
+            recyclerAdapter.updateItems(items)
         }
         return view
     }

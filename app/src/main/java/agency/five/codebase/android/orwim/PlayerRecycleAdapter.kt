@@ -1,5 +1,7 @@
 package agency.five.codebase.android.orwim
 
+import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,12 +42,12 @@ class PlayerRecycleAdapter(
         notifyItemRangeChanged(index, itemCount)
     }
 
-    class PlayerViewHolder(val view: View, clickListener: ItemListener) :
+    class PlayerViewHolder(private val view: View, clickListener: ItemListener) :
         RecyclerView.ViewHolder(view) {
-
         init {
             itemView.setOnClickListener {
                 clickListener.onItemClick(adapterPosition)
+                Log.d("kansfliadcpad", "$adapterPosition")
             }
         }
 
@@ -68,10 +70,12 @@ class PlayerRecycleAdapter(
         mListener = listener
     }
 
-    fun updateItems(newItems:ArrayList<Player>){
-        items=newItems
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateItems(newItems: ArrayList<Player>) {
+        items = newItems
         notifyDataSetChanged()
     }
+
     interface ItemListener {
         fun onItemClick(index: Int)
     }
