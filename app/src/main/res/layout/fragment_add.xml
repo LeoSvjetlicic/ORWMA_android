@@ -13,7 +13,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="16dp"
         android:clickable="false"
         android:ems="10"
@@ -46,6 +46,28 @@
         app:layout_constraintTop_toBottomOf="@+id/add_imageUrl" />
 
     <EditText
+        android:id="@+id/add_nation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:fallbackLineSpacing="false"
+        android:hint="@string/nation"
+        android:inputType="textMultiLine"
+        android:minHeight="48dp"
+        android:singleLine="false"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_full_name"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <EditText
         android:id="@+id/add_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -55,27 +77,29 @@
         android:ems="10"
         android:fallbackLineSpacing="false"
         android:hint="@string/description"
+        android:inputType="textMultiLine"
         android:minHeight="48dp"
         android:singleLine="false"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:inputType="textMultiLine"
         android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_full_name"
+        app:layout_constraintTop_toBottomOf="@+id/add_nation"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
         android:id="@+id/add_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/rounded_corners"
         android:backgroundTint="@null"
         android:text="@string/add"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_description" />
 </androidx.constraintlayout.widget.ConstraintLayout>

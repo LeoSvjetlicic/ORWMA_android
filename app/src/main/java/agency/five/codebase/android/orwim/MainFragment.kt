@@ -30,7 +30,8 @@ class MainFragment : Fragment(), PlayerRecycleAdapter.ContentListener {
                         id = data.id,
                         imageUrl = data.get("imageUrl").toString(),
                         description = data.get("description").toString(),
-                        name = data.get("name").toString()
+                        name = data.get("name").toString(),
+                        nation = data.get("nation").toString()
                     )
                     items.add(player)
                 }
@@ -47,6 +48,7 @@ class MainFragment : Fragment(), PlayerRecycleAdapter.ContentListener {
                         bundle.putString("IMAGE", items[index].imageUrl)
                         bundle.putString("NAME", items[index].name)
                         bundle.putString("DESCRIPTION", items[index].description)
+                        bundle.putString("NATION", items[index].nation)
                         detailsFragment.arguments = bundle
 
                         val fragmentTransaction: FragmentTransaction =
@@ -70,11 +72,12 @@ class MainFragment : Fragment(), PlayerRecycleAdapter.ContentListener {
         val searchText = view.findViewById<EditText>(R.id.search_input)
         val searchBtn = view.findViewById<ImageButton>(R.id.search_button)
         searchBtn.setOnClickListener {
-            if (searchText.text.isEmpty()) {
-                items = cachedItems
+            items = cachedItems
+            items = if (searchText.text.isEmpty()) {
+                cachedItems
             } else {
-                items = items.filter {
-                    it.name.contains(
+                items.filter {
+                    it.name.contains(searchText.text, true) || it.nation.contains(
                         searchText.text,
                         true
                     )
