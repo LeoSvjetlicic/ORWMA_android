@@ -7,4 +7,6 @@
     <string name="add">Add</string>
     <string name="search">Search</string>
     <string name="nation">Nation</string>
+    <string name="byNation">Search by nation</string>
+    <string name="byName">Search by name</string>
 </resources>

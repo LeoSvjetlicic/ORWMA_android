@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_input" />
+        app:layout_constraintTop_toBottomOf="@+id/switch1" />
 
     <Button
         android:id="@+id/add_button_main"
@@ -39,14 +39,13 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="25dp"
-        android:layout_marginBottom="10dp"
         android:background="@drawable/outline"
         android:ems="10"
         android:hint="@string/search"
         android:inputType="textPersonName"
         android:paddingStart="15dp"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/main_fragment_recycler"
+        app:layout_constraintBottom_toTopOf="@+id/switch1"
         app:layout_constraintEnd_toStartOf="@+id/search_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -60,9 +59,23 @@
         android:background="@drawable/circle"
         android:backgroundTint="@color/my_accent"
         android:src="@drawable/ic_baseline_search_24"
-        app:layout_constraintBottom_toTopOf="@+id/main_fragment_recycler"
+        app:layout_constraintBottom_toBottomOf="@+id/search_input"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/search_input"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/search_input"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/byName"
+        app:layout_constraintBottom_toTopOf="@+id/main_fragment_recycler"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_input"
+        tools:ignore="TouchTargetSizeCheck" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
