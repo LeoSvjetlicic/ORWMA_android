@@ -85,33 +85,13 @@ class MainFragment : Fragment(), PlayerRecycleAdapter.ContentListener {
             items = if (searchText.text.isEmpty()) {
                 cachedItems
             } else {
-                var tempStartWithPlayers: List<Player>
-                var tempContainsPlayers: List<Player>
                 if (switch.isChecked) {
-                    tempStartWithPlayers =
-                        items.filter { it.nation.startsWith(searchText.text, true) }
-                            .sortedBy { it.nation }
-                    tempContainsPlayers = items.filter {
-                        it.nation.contains(
-                            searchText.text,
-                            true
-                        ) && !tempStartWithPlayers.contains(it)
-                    }
-                        .sortedBy { it.nation }
-                    (tempStartWithPlayers + tempContainsPlayers) as ArrayList<Player>
-
+                    items.sortedBy { it.nation }
+                        .filter { it.nation.startsWith(searchText.text, true) }
+                            as ArrayList<Player>
                 } else {
-                    tempStartWithPlayers =
-                        items.filter { it.name.startsWith(searchText.text, true) }
-                            .sortedBy { it.name }
-                    tempContainsPlayers = items.filter {
-                        it.name.contains(
-                            searchText.text,
-                            true
-                        ) && !tempStartWithPlayers.contains(it)
-                    }
-                        .sortedBy { it.name }
-                    (tempStartWithPlayers + tempContainsPlayers) as ArrayList<Player>
+                    items.sortedBy { it.name }.filter { it.name.startsWith(searchText.text, true) }
+                            as ArrayList<Player>
                 }
             }
             recyclerAdapter.updateItems(items)
